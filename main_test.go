@@ -57,7 +57,10 @@ func TestMainHandlerWhenOk(t *testing.T) {
 	handler.ServeHTTP(responseRecorder, req)
 
 	//проверка, что сервер вернул код ответа 200
-	assert.Equal(t, http.StatusOK, responseRecorder.Code)
+	require.Equal(t, http.StatusOK, responseRecorder.Code)
+
+	//прооверяем, что тело ответа не пустое
+	assert.NotEmpty(t, responseRecorder.Body)
 }
 
 func TestMainHandlerWhenWrongCity(t *testing.T) {
